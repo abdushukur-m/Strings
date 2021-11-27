@@ -1,36 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include <string.h>
+#include <ctype.h>
 
-int main() {
+int main()
+{
 
-    char names[50], word[50], ch;
-    int count = 0;
+    char str[50];
+    int occ[strlen(str)], j = 0, count;
+    fgets(str, 50, stdin);
+    for (int i = 0; i < strlen(str); i++) {occ[i] = -1;}
 
-    printf("Enter a sentence: ");
-    fgets(names, sizeof(names), stdin);
+    for (int i = 0; i < strlen(str); i++){if (isalpha(str[i])){++j;}}
+    
+    int size=j, str_int[size]; j=0;
+    
+    for (int i = 0; i < strlen(str); i++){
+        if (isalpha(str[i])){str_int[j] = (int)str[i], ++j;}}
 
-    printf("Enter a character to find its frequency: ");
-    scanf("%c", &ch);
+    for (int i = 0; i < size; i++){
+        count=1;
+        for (int j = i+1; j < size; j++){
+            if (str_int[i]==str_int[j]){
+                count++;
 
-    for (int i=0; names[i]!=0; i++){
-        if (ch == names[i]){
-            count++;
+                occ[j]=0;
+            }
         }
+        if (occ[i]!=0) {occ[i]=count;}
     }
-    printf("Enter a word to find its frequency: ");
-    fgets(word, sizeof(word), stdin);
-
-    for (int i=0; names[i]!=0; i++){
-        if (word == names[i]){
-            count++;
-        }
-    }
-
-
-
-    printf("Frequency of %c = %d", ch, count);
+    printf("%s\n", str);
+    for (int i = 0; i < size; i++){if (occ[i]!=0){printf("%c (%d)\n",str_int[i], occ[i]);}}
+    
+    
 
     return 0;
 }
