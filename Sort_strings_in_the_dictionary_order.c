@@ -11,14 +11,13 @@ int main() {
    }
 
    // storing strings in the lexicographical order
-   for (int i = 0; i < 5; ++i) {
-      for (int j = i + 1; j < 5; ++j) {
-
+   for (int i = 1; i < 5; ++i) {
+      for (int j = 0; j < 4; ++j) {
          // swapping strings if they are not in the lexicographical order
-         if (strcmp(str[i], str[j]) > 0) {
-            strcpy(temp, str[i]);
-            strcpy(str[i], str[j]);
-            strcpy(str[j], temp);
+         if (strcmp(str[j], str[j+1]) > 0) {
+            strcpy(temp, str[j]);
+            strcpy(str[j], str[j+1]);
+            strcpy(str[j+1], temp);
          }
       }
    }
